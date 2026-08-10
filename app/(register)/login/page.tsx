@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { PasswordInput } from "@/components/password-input";
 
 import Link from "next/link";
+import FormLogin from "../_components/forms/form-login";
 
 export default function Login() {
 	return (
@@ -15,29 +16,7 @@ export default function Login() {
 			<Title titile="Login" className="text-primary title text-end" />
 
 			<div className="mt-15 mb-6">
-				<form action="">
-					<div className="space-y-6">
-						<Field>
-							<FieldLabel htmlFor="email" className="text">
-								E-mail
-							</FieldLabel>
-							<Input
-								id="email"
-								placeholder="Escreva seu e-mail..."
-								className="w-full min-w-sm"
-							/>
-							{true && <FieldError errors={[]}>error</FieldError>}
-						</Field>
-
-						<Field>
-							<FieldLabel htmlFor="senha" className="text">
-								Senha
-							</FieldLabel>
-							<PasswordInput id="senha" />
-							{true && <FieldError errors={[]}>error</FieldError>}
-						</Field>
-					</div>
-				</form>
+				<FormLogin />
 			</div>
 
 			<Button variant="link" className="p-0">
