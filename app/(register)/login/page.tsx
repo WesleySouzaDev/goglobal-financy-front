@@ -5,6 +5,8 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
+import { PasswordInput } from "@/components/password-input";
+
 import Link from "next/link";
 
 export default function Login() {
@@ -31,11 +33,7 @@ export default function Login() {
 							<FieldLabel htmlFor="senha" className="text">
 								Senha
 							</FieldLabel>
-							<Input
-								id="senha"
-								placeholder="Escreva sua senha..."
-								className="w-full min-w-sm"
-							/>
+							<PasswordInput id="senha" />
 							{true && <FieldError errors={[]}>error</FieldError>}
 						</Field>
 					</div>
