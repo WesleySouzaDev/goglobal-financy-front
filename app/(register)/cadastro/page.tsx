@@ -1,13 +1,10 @@
 import Title from "@/components/title";
 
 import { Button } from "@/components/ui/button";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
-import { PasswordInput } from "@/components/password-input";
-
 import Link from "next/link";
+import FormCadastro from "../_components/forms/form-cadastro";
 
 export default async function Cadastro() {
 	return (
@@ -15,40 +12,7 @@ export default async function Cadastro() {
 			<Title titile="Cadastre-se" className="text-primary title text-end" />
 
 			<div className="mt-15 mb-6">
-				<form action="">
-					<div className="space-y-6">
-						<Field>
-							<FieldLabel htmlFor="nome" className="text">
-								Nome
-							</FieldLabel>
-							<Input
-								id="nome"
-								placeholder="Escreva seu nome..."
-								className="w-full min-w-sm"
-							/>
-							{true && <FieldError errors={[]}>error</FieldError>}
-						</Field>
-						<Field>
-							<FieldLabel htmlFor="email" className="text">
-								E-mail
-							</FieldLabel>
-							<Input
-								id="email"
-								placeholder="Escreva seu e-mail..."
-								className="w-full min-w-sm"
-							/>
-							{true && <FieldError errors={[]}>error</FieldError>}
-						</Field>
-
-						<Field>
-							<FieldLabel htmlFor="senha" className="text">
-								Senha
-							</FieldLabel>
-							<PasswordInput id="senha" />
-							{true && <FieldError errors={[]}>error</FieldError>}
-						</Field>
-					</div>
-				</form>
+				<FormCadastro />
 			</div>
 
 			<Separator />
