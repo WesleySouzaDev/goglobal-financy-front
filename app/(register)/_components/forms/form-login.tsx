@@ -36,7 +36,7 @@ export default function FormLogin() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<div className="space-y-6">
+			<div className="space-y-6 w-full">
 				<Field>
 					<FieldLabel htmlFor="email" className="text">
 						E-mail
@@ -44,23 +44,23 @@ export default function FormLogin() {
 					<Input
 						id="email"
 						placeholder="Escreva seu e-mail..."
-						className="w-full min-w-sm"
+						className="w-full max-w-md"
 						{...register("email")}
 					/>
 					{errors.email && <FieldError errors={[errors.email]}></FieldError>}
 				</Field>
 
 				<Field>
-					<FieldLabel htmlFor="senha" className="text">
+					<FieldLabel htmlFor="password" className="text">
 						Senha
 					</FieldLabel>
-					<PasswordInput id="senha" {...register("password")} />
+					<PasswordInput id="password" {...register("password")} />
 					{errors.password && (
 						<FieldError errors={[errors.password]}></FieldError>
 					)}
 				</Field>
 
-				<Button type="submit" className="bg-primary/50 cursor-pointer">
+				<Button type="submit" className="bg-primary/70 cursor-pointer">
 					Entrar
 					<FaDoorOpen />
 				</Button>
