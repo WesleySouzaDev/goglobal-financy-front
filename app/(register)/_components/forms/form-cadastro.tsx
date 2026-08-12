@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,6 +13,8 @@ import { PasswordInput } from "@/components/password-input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import DialogLogin from "../dialog-login";
 
 const schema = z.object({
 	nome: z
@@ -34,7 +38,7 @@ const schema = z.object({
 		.regex(/[0-9]/, "A senha deve conter um no mínimo número"),
 });
 
-type FormCadastroData = z.infer<typeof schema>;
+export type FormCadastroData = z.infer<typeof schema>;
 
 export default function FormCadastro() {
 	const {
@@ -45,50 +49,63 @@ export default function FormCadastro() {
 		resolver: zodResolver(schema),
 	});
 
-	const onSubmit = (data: FormCadastroData) =>
-		console.log(JSON.stringify(data));
+	const [formData, setFormData] = useState<FormCadastroData | null>(null);
+	const [dialogOpen, setDialogOpen] = useState(false);
+
+	const onSubmit = (data: FormCadastroData) => {
+		setFormData(data);
+		setDialogOpen(true);
+	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<div className="space-y-6 w-full">
-				<Field>
-					<FieldLabel htmlFor="nome" className="text">
-						Nome
-					</FieldLabel>
-					<Input
-						id="nome"
-						placeholder="Escreva seu nome..."
-						className="w-full max-w-md"
-						{...register("nome")}
-					/>
-					{errors.nome && <FieldError errors={[errors.nome]}></FieldError>}
-				</Field>
-				<Field>
-					<FieldLabel htmlFor="email" className="text">
-						E-mail
-					</FieldLabel>
-					<Input
-						id="email"
-						placeholder="Escreva seu e-mail..."
-						className="w-full max-w-md"
-						{...register("email")}
-					/>
-					{errors.email && <FieldError errors={[errors.email]}></FieldError>}
-				</Field>
+		<>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<div className="space-y-6 w-full">
+					<Field>
+						<FieldLabel htmlFor="nome" className="text">
+							Nome
+						</FieldLabel>
+						<Input
+							id="nome"
+							placeholder="Escreva seu nome..."
+							className="w-full max-w-md"
+							{...register("nome")}
+						/>
+						{errors.nome && <FieldError errors={[errors.nome]}></FieldError>}
+					</Field>
+					<Field>
+						<FieldLabel htmlFor="email" className="text">
+							E-mail
+						</FieldLabel>
+						<Input
+							id="email"
+							placeholder="Escreva seu e-mail..."
+							className="w-full max-w-md"
+							{...register("email")}
+						/>
+						{errors.email && <FieldError errors={[errors.email]}></FieldError>}
+					</Field>
 
-				<Field>
-					<FieldLabel htmlFor="senha" className="text">
-						Senha
-					</FieldLabel>
-					<PasswordInput id="senha" {...register("senha")} />
-					{errors.senha && <FieldError errors={[errors.senha]}></FieldError>}
-				</Field>
+					<Field>
+						<FieldLabel htmlFor="senha" className="text">
+							Senha
+						</FieldLabel>
+						<PasswordInput id="senha" {...register("senha")} />
+						{errors.senha && <FieldError errors={[errors.senha]}></FieldError>}
+					</Field>
 
-				<Button type="submit" className="bg-primary/70 cursor-pointer">
-					Cadastrar
-					<FaUserPlus />
-				</Button>
-			</div>
-		</form>
+					<Button type="submit" className="bg-primary/70 cursor-pointer">
+						Cadastrar
+						<FaUserPlus />
+					</Button>
+				</div>
+				{formData &&
+					DialogLogin({
+						formData,
+						open: dialogOpen,
+						setDialogOpen,
+					})}
+			</form>
+		</>
 	);
 }
