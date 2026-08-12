@@ -60,7 +60,11 @@ export default function FormLogin() {
 					)}
 				</Field>
 
-				<Button type="submit" className="bg-primary/70 cursor-pointer">
+				<Button
+					type="submit"
+					disabled={isSubmitting}
+					className="bg-primary/70 cursor-pointer"
+				>
 					Entrar
 					<FaDoorOpen />
 				</Button>
